@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "MarkdownTextBlock (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "MarkdownTextBlock (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
