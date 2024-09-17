@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:MauiApp1"
+             xmlns:controls="clr-namespace:CommunityToolkit.Labs.WinUI.MarkdownTextBlock"
+             x:Class="MauiApp1.MainPage"
+             x:DataType="local:MainPage">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Editor
+            x:Name="MarkdownTextBox"
+            Text="{Binding Markdown}"
+            VerticalOptions="Fill" />
+
+        <ScrollView
+            Grid.Column="1">
+
+            <controls:MarkdownTextBlock 
+                Text="{Binding Markdown, Mode=OneWay}"
+                Padding="12" />
+
+        </ScrollView>
+
+    </Grid>
+
+</ContentPage>
