@@ -1,89 +1,91 @@
-//// Licensed to the .NET Foundation under one or more agreements.
-//// The .NET Foundation licenses this file to you under the MIT license.
-//// See the LICENSE file in the project root for more information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
 
-//using Markdig.Syntax.Inlines;
-//using Windows.UI.Text;
+using Markdig.Syntax.Inlines;
 
-//namespace CommunityToolkit.Labs.WinUI.MarkdownTextBlock.TextElements;
+namespace CommunityToolkit.Labs.WinUI.MarkdownTextBlock.TextElements;
 
-//internal class MyEmphasisInline : IAddChild
-//{
-//    private Span _span;
-//    private EmphasisInline _markdownObject;
+internal class MyEmphasisInline : IAddChild
+{
+    private FormattedString _formatted;
+    private EmphasisInline _markdownObject;
 
-//    private bool _isBold;
-//    private bool _isItalic;
-//    private bool _isStrikeThrough;
+    private bool _isBold;
+    private bool _isItalic;
+    private bool _isStrikeThrough;
 
-//    public Element TextElement
-//    {
-//        get => _span;
-//    }
+    public Element TextElement
+    {
+        get => _formatted;
+    }
 
-//    public MyEmphasisInline(EmphasisInline emphasisInline)
-//    {
-//        _span = new Span();
-//        _markdownObject = emphasisInline;
-//    }
+    public MyEmphasisInline(EmphasisInline emphasisInline)
+    {
+        _formatted = new FormattedString();
+        _markdownObject = emphasisInline;
+    }
 
-//    public void AddChild(IAddChild child)
-//    {
-//        try
-//        {
-//            if (child is MyInlineText inlineText)
-//            {
-//                _span.Inlines.Add((Run)inlineText.TextElement);
-//            }
-//            else if (child is MyEmphasisInline emphasisInline)
-//            {
-//                if (emphasisInline._isBold) { SetBold(); }
-//                if (emphasisInline._isItalic) { SetItalic(); }
-//                if (emphasisInline._isStrikeThrough) { SetStrikeThrough(); }
-//                _span.Inlines.Add(emphasisInline._span);
-//            }
-//        }
-//        catch (Exception ex)
-//        {
-//            throw new Exception($"Error in {nameof(MyEmphasisInline)}.{nameof(AddChild)}: {ex.Message}");
-//        }
-//    }
+    public void AddChild(IAddChild child)
+    {
+        try
+        {
+            if (child.TextElement is Span span)
+            {
+                _formatted.Spans.Add(span);
+            }
+            else if (child.TextElement is FormattedString formattedString)
+            {
+                foreach (var formatted in formattedString.Spans)
+                {
+                    _formatted.Spans.Add(formatted);
+                }
+            }
 
-//    public void SetBold()
-//    {
-//        #if WINUI3
-//        _span.FontWeight = Microsoft.UI.Text.FontWeights.Bold;
-//        #elif WINUI2
-//        _span.FontWeight = Windows.UI.Text.FontWeights.Bold;
-//        #endif
+            if (_isBold) { SetBold(); }
+            if (_isItalic) { SetItalic(); }
+            if (_isStrikeThrough) { SetStrikeThrough(); }
+        }
+        catch (Exception ex)
+        {
+            throw new Exception($"Error in {nameof(MyEmphasisInline)}.{nameof(AddChild)}: {ex.Message}");
+        }
+    }
 
-//        _isBold = true;
-//    }
+    public void SetBold()
+    {
+        foreach (var span in _formatted.Spans)
+        {
+            span.FontAttributes |= FontAttributes.Bold;
+        }
 
-//    public void SetItalic()
-//    {
-//        _span.FontStyle = FontStyle.Italic;
-//        _isItalic = true;
-//    }
+        _isBold = true;
+    }
 
-//    public void SetStrikeThrough()
-//    {
-//        #if WINUI3
-//        _span.TextDecorations = Windows.UI.Text.TextDecorations.Strikethrough;
-//        #elif WINUI2
-//        _span.TextDecorations = Windows.UI.Text.TextDecorations.Strikethrough;
-//        #endif
+    public void SetItalic()
+    {
+        foreach (var span in _formatted.Spans)
+        {
+            span.FontAttributes |= FontAttributes.Italic;
+        }
 
-//        _isStrikeThrough = true;
-//    }
+        _isItalic = true;
+    }
 
-//    public void SetSubscript()
-//    {
-//        _span.SetValue(Typography.VariantsProperty, FontVariants.Subscript);
-//    }
+    public void SetStrikeThrough()
+    {
+        // TODO: _span.TextDecorations = Windows.UI.Text.TextDecorations.Strikethrough;
 
-//    public void SetSuperscript()
-//    {
-//        _span.SetValue(Typography.VariantsProperty, FontVariants.Superscript);
-//    }
-//}
+        _isStrikeThrough = true;
+    }
+
+    public void SetSubscript()
+    {
+        // TODO: _formatted.SetValue(Typography.VariantsProperty, FontVariants.Subscript);
+    }
+
+    public void SetSuperscript()
+    {
+        // TODO: _formatted.SetValue(Typography.VariantsProperty, FontVariants.Superscript);
+    }
+}

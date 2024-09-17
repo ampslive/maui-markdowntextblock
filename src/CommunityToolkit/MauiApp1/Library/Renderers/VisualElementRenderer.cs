@@ -161,7 +161,7 @@ public class VisualElementRenderer : RendererBase
         ObjectRenderers.Add(new AutoLinkInlineRenderer());
         ObjectRenderers.Add(new CodeInlineRenderer());
         //ObjectRenderers.Add(new DelimiterInlineRenderer());
-        //ObjectRenderers.Add(new EmphasisInlineRenderer());
+        ObjectRenderers.Add(new EmphasisInlineRenderer());
         //ObjectRenderers.Add(new HtmlEntityInlineRenderer());
         ObjectRenderers.Add(new LineBreakInlineRenderer());
         ObjectRenderers.Add(new LinkInlineRenderer());
