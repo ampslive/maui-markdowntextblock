@@ -1,32 +1,32 @@
-//// Licensed to the .NET Foundation under one or more agreements.
-//// The .NET Foundation licenses this file to you under the MIT license.
-//// See the LICENSE file in the project root for more information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
 
-//using Markdig.Syntax;
-//using CommunityToolkit.Labs.WinUI.MarkdownTextBlock.TextElements;
+using Markdig.Syntax;
+using CommunityToolkit.Labs.WinUI.MarkdownTextBlock.TextElements;
 
-//namespace CommunityToolkit.Labs.WinUI.MarkdownTextBlock.Renderers.ObjectRenderers;
+namespace CommunityToolkit.Labs.WinUI.MarkdownTextBlock.Renderers.ObjectRenderers;
 
-//internal class ListRenderer : VisualElementMarkdownObjectRenderer<ListBlock>
-//{
-//    protected override void Write(VisualElementRenderer renderer, ListBlock listBlock)
-//    {
-//        if (renderer == null) throw new ArgumentNullException(nameof(renderer));
-//        if (listBlock == null) throw new ArgumentNullException(nameof(listBlock));
+internal class ListRenderer : VisualElementMarkdownObjectRenderer<ListBlock>
+{
+    protected override void Write(VisualElementRenderer renderer, ListBlock listBlock)
+    {
+        if (renderer == null) throw new ArgumentNullException(nameof(renderer));
+        if (listBlock == null) throw new ArgumentNullException(nameof(listBlock));
 
-//        var list = new MyList(listBlock);
+        var list = new MyList(listBlock);
 
-//        renderer.Push(list);
+        renderer.Push(list);
 
-//        foreach (var item in listBlock)
-//        {
-//            var listItemBlock = (ListItemBlock)item;
-//            var listItem = new MyBlockContainer(listItemBlock);
-//            renderer.Push(listItem);
-//            renderer.WriteChildren(listItemBlock);
-//            renderer.Pop();
-//        }
+        foreach (var item in listBlock)
+        {
+            var listItemBlock = (ListItemBlock)item;
+            var listItem = new MyBlockContainer(listItemBlock);
+            renderer.Push(listItem);
+            renderer.WriteChildren(listItemBlock);
+            renderer.Pop();
+        }
 
-//        renderer.Pop();
-//    }
-//}
+        renderer.Pop();
+    }
+}

@@ -150,7 +150,7 @@ public class VisualElementRenderer : RendererBase
     {
         // Default block renderers
         ObjectRenderers.Add(new CodeBlockRenderer());
-        //ObjectRenderers.Add(new ListRenderer());
+        ObjectRenderers.Add(new ListRenderer());
         ObjectRenderers.Add(new HeadingRenderer());
         ObjectRenderers.Add(new ParagraphRenderer());
         ObjectRenderers.Add(new QuoteBlockRenderer());

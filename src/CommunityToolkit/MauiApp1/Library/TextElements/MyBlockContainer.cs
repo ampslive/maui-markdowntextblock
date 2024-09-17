@@ -1,35 +1,29 @@
-//// Licensed to the .NET Foundation under one or more agreements.
-//// The .NET Foundation licenses this file to you under the MIT license.
-//// See the LICENSE file in the project root for more information.
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
 
-//using Markdig.Syntax;
+using Markdig.Syntax;
 
-//namespace CommunityToolkit.Labs.WinUI.MarkdownTextBlock.TextElements;
+namespace CommunityToolkit.Labs.WinUI.MarkdownTextBlock.TextElements;
 
-//internal class MyBlockContainer : IAddChild
-//{
-//    private ContainerBlock _containerBlock;
-//    private InlineUIContainer _inlineUIContainer;
-//    private MyFlowDocument _flowDocument;
-//    private Paragraph _paragraph;
+internal class MyBlockContainer : IAddChild
+{
+    private ContainerBlock _containerBlock;
+    private MyFlowDocument _flowDocument;
 
-//    public Element TextElement
-//    {
-//        get => _paragraph;
-//    }
+    public Element TextElement
+    {
+        get => _flowDocument.Root;
+    }
 
-//    public MyBlockContainer(ContainerBlock containerBlock)
-//    {
-//        _containerBlock = containerBlock;
-//        _inlineUIContainer = new InlineUIContainer();
-//        _flowDocument = new MyFlowDocument(containerBlock);
-//        _inlineUIContainer.Child = _flowDocument.RichTextBlock;
-//        _paragraph = new Paragraph();
-//        _paragraph.Inlines.Add(_inlineUIContainer);
-//    }
+    public MyBlockContainer(ContainerBlock containerBlock)
+    {
+        _containerBlock = containerBlock;
+        _flowDocument = new MyFlowDocument(containerBlock);
+    }
 
-//    public void AddChild(IAddChild child)
-//    {
-//        _flowDocument.AddChild(child);
-//    }
-//}
+    public void AddChild(IAddChild child)
+    {
+        _flowDocument.AddChild(child);
+    }
+}
