@@ -170,7 +170,7 @@ public class VisualElementRenderer : RendererBase
 
         // Extension renderers
         ObjectRenderers.Add(new TableRenderer());
-        //ObjectRenderers.Add(new TaskListRenderer());
+        ObjectRenderers.Add(new TaskListRenderer());
         //ObjectRenderers.Add(new HtmlInlineRenderer());
     }
 }
