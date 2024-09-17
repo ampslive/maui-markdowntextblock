@@ -43,7 +43,7 @@ internal class MyAutolinkInline : IAddChild
     private void AddAsLink(Span span)
     {
         span.GestureRecognizers.Add(new TapGestureRecognizer { Command = _command });
-        span.TextColor ??= Colors.Blue;
+        span.TextColor = Colors.Blue;
         _string.Spans.Add(span);
     }
 }

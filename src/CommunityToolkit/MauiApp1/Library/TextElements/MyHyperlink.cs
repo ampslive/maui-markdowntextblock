@@ -62,7 +62,7 @@ internal class MyHyperlink : IAddChild
     private void AddAsLink(Span span)
     {
         span.GestureRecognizers.Add(new TapGestureRecognizer { Command = _command });
-        span.TextColor ??= Colors.Blue;
+        span.TextColor = Colors.Blue;
         _hyperlink.Spans.Add(span);
     }
 }
