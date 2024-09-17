@@ -30,6 +30,21 @@ public partial class MarkdownTextBlock : Control
         typeof(MarkdownTextBlock),
         new PropertyMetadata(null, OnTextChanged));
 
+    public MarkdownTextBlock()
+    {
+        DefaultStyleKey = typeof(MarkdownTextBlock);
+
+        _document = new MyFlowDocument();
+        _pipeline = new MarkdownPipelineBuilder()
+            .UseEmphasisExtras()
+            .UseAutoLinks()
+            .UseTaskLists()
+            .UsePipeTables()
+            .Build();
+
+        Config = MarkdownConfig.Default;
+    }
+
     public MarkdownConfig Config
     {
         get => (MarkdownConfig)GetValue(ConfigProperty);
@@ -56,18 +71,6 @@ public partial class MarkdownTextBlock : Control
         {
             self.ApplyText(self.Text, true);
         }
-    }
-
-    public MarkdownTextBlock()
-    {
-        this.DefaultStyleKey = typeof(MarkdownTextBlock);
-        _document = new MyFlowDocument();
-        _pipeline = new MarkdownPipelineBuilder()
-            .UseEmphasisExtras()
-            .UseAutoLinks()
-            .UseTaskLists()
-            .UsePipeTables()
-            .Build();
     }
 
     protected override void OnApplyTemplate()
