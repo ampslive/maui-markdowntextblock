@@ -47,6 +47,8 @@ internal class MyHeading : IAddChild
             5 => _config.Themes.H5FontWeight,
             _ => _config.Themes.H6FontWeight,
         };
+        _paragraph.Padding = _config.Themes.Padding;
+        _paragraph.Margin = _config.Themes.InternalMargin;
     }
 
     public MyHeading(HtmlNode htmlNode, MarkdownConfig config)
